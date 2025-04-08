@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+const BASEURL = "https://db-group5-452710.wl.r.appspot.com";
+
 /**
  * A simple App component that contains each table's CRUD section.
  */
@@ -52,7 +54,7 @@ function UserCrudSection() {
   const loadUsers = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/users");
+      const resp = await fetch(`${BASEURL}/user`);
       const data = await resp.json();
       setUsers(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -65,7 +67,7 @@ function UserCrudSection() {
   const deleteUser = async (userId) => {
     if (!window.confirm(`Delete user with ID ${userId}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/USER/${userId}`, {
+      await fetch(`${BASEURL}/USER/${userId}`, {
         method: "DELETE",
       });
       // Refresh list
@@ -78,7 +80,7 @@ function UserCrudSection() {
   // Create a new user
   const createUser = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/USER", {
+      await fetch(`${BASEURL}/USER`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -110,7 +112,7 @@ function UserCrudSection() {
   // Submit update
   const updateUser = async (userId) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/USER/${userId}`, {
+      await fetch(`${BASEURL}/USER/${userId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -272,7 +274,7 @@ function CustomerCrudSection() {
   const loadCustomers = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/customers");
+      const resp = await fetch(`${BASEURL}/customers`);
       const data = await resp.json();
       setCustomers(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -284,7 +286,7 @@ function CustomerCrudSection() {
   const deleteCustomer = async (id) => {
     if (!window.confirm(`Delete CUSTOMER with user_id=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CUSTOMER/${id}`, {
+      await fetch(`${BASEURL}/CUSTOMER/${id}`, {
         method: "DELETE",
       });
       loadCustomers();
@@ -295,7 +297,7 @@ function CustomerCrudSection() {
 
   const createCustomer = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/CUSTOMER", {
+      await fetch(`${BASEURL}/CUSTOMER`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCustomer),
@@ -323,7 +325,7 @@ function CustomerCrudSection() {
 
   const updateCustomer = async (id) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CUSTOMER/${id}`, {
+      await fetch(`${BASEURL}/CUSTOMER/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -484,7 +486,7 @@ function SellerCrudSection() {
   const loadSellers = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/sellers");
+      const resp = await fetch(`${BASEURL}/sellers`);
       const data = await resp.json();
       setSellers(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -496,7 +498,7 @@ function SellerCrudSection() {
   const deleteSeller = async (id) => {
     if (!window.confirm(`Delete SELLER with user_id=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/SELLER/${id}`, {
+      await fetch(`${BASEURL}/SELLER/${id}`, {
         method: "DELETE",
       });
       loadSellers();
@@ -507,7 +509,7 @@ function SellerCrudSection() {
 
   const createSeller = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/SELLER", {
+      await fetch(`${BASEURL}/SELLER`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newSeller),
@@ -533,7 +535,7 @@ function SellerCrudSection() {
 
   const updateSeller = async (id) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/SELLER/${id}`, {
+      await fetch(`${BASEURL}/SELLER/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -678,7 +680,7 @@ function AdminCrudSection() {
   const loadAdmins = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/admins");
+      const resp = await fetch(`${BASEURL}/admins`);
       const data = await resp.json();
       setAdmins(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -690,7 +692,7 @@ function AdminCrudSection() {
   const deleteAdmin = async (id) => {
     if (!window.confirm(`Delete ADMIN with user_id=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/ADMIN/${id}`, {
+      await fetch(`${BASEURL}/ADMIN/${id}`, {
         method: "DELETE",
       });
       loadAdmins();
@@ -701,7 +703,7 @@ function AdminCrudSection() {
 
   const createAdmin = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/ADMIN", {
+      await fetch(`${BASEURL}/ADMIN`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newAdmin),
@@ -725,7 +727,7 @@ function AdminCrudSection() {
 
   const updateAdmin = async (id) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/ADMIN/${id}`, {
+      await fetch(`${BASEURL}/ADMIN/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -843,7 +845,7 @@ function CategoryCrudSection() {
   const loadCategories = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/categories");
+      const resp = await fetch(`${BASEURL}/categories`);
       const data = await resp.json();
       setCategories(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -855,7 +857,7 @@ function CategoryCrudSection() {
   const deleteCategory = async (id) => {
     if (!window.confirm(`Delete CATEGORY with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CATEGORY/${id}`, {
+      await fetch(`${BASEURL}/CATEGORY/${id}`, {
         method: "DELETE",
       });
       loadCategories();
@@ -866,7 +868,7 @@ function CategoryCrudSection() {
 
   const createCategory = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/CATEGORY", {
+      await fetch(`${BASEURL}/CATEGORY`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCategory),
@@ -892,7 +894,7 @@ function CategoryCrudSection() {
 
   const updateCategory = async (id) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CATEGORY/${id}`, {
+      await fetch(`${BASEURL}/CATEGORY/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -1038,7 +1040,7 @@ function CartCrudSection() {
   const loadCarts = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/carts");
+      const resp = await fetch(`${BASEURL}/carts`);
       const data = await resp.json();
       setCarts(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -1050,7 +1052,7 @@ function CartCrudSection() {
   const deleteCart = async (id) => {
     if (!window.confirm(`Delete CART with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CART/${id}`, {
+      await fetch(`${BASEURL}/CART/${id}`, {
         method: "DELETE",
       });
       loadCarts();
@@ -1061,7 +1063,7 @@ function CartCrudSection() {
 
   const createCart = async () => {
     try {
-      await fetch("db-group5-452710.wl.r.appspot.com/CART", {
+      await fetch(`${BASEURL}/CART`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCart),
@@ -1085,7 +1087,7 @@ function CartCrudSection() {
 
   const updateCart = async (id) => {
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/CART/${id}`, {
+      await fetch(`${BASEURL}/CART/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editForm),
@@ -1210,7 +1212,7 @@ function ProductCrudSection() {
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/products");
+      const resp = await fetch(`${BASEURL}/products`);
       const data = await resp.json();
       setProducts(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -1223,7 +1225,7 @@ function ProductCrudSection() {
   const deleteProduct = async (id) => {
     if (!window.confirm(`Delete PRODUCT with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/PRODUCT/${id}`, {
+      await fetch(`${BASEURL}/PRODUCT/${id}`, {
         method: "DELETE",
       });
       loadProducts();
@@ -1242,7 +1244,7 @@ function ProductCrudSection() {
         stock_quantity: parseInt(newProduct.stock_quantity) || 0,
       };
 
-      await fetch("db-group5-452710.wl.r.appspot.com/PRODUCT", {
+      await fetch(`${BASEURL}/PRODUCT`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1284,7 +1286,7 @@ function ProductCrudSection() {
         price: parseFloat(editForm.price) || 0,
         stock_quantity: parseInt(editForm.stock_quantity) || 0,
       };
-      await fetch(`db-group5-452710.wl.r.appspot.com/PRODUCT/${id}`, {
+      await fetch(`${BASEURL}/PRODUCT/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1516,7 +1518,7 @@ function OrderCrudSection() {
   const loadOrders = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/orders");
+      const resp = await fetch(`${BASEURL}/orders`);
       const data = await resp.json();
       setOrders(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -1528,7 +1530,7 @@ function OrderCrudSection() {
   const deleteOrder = async (id) => {
     if (!window.confirm(`Delete ORDER with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/ORDER/${id}`, {
+      await fetch(`${BASEURL}/ORDER/${id}`, {
         method: "DELETE",
       });
       loadOrders();
@@ -1543,7 +1545,7 @@ function OrderCrudSection() {
         ...newOrder,
         total_amount: parseFloat(newOrder.total_amount) || 0,
       };
-      await fetch("db-group5-452710.wl.r.appspot.com/ORDER", {
+      await fetch(`${BASEURL}/ORDER`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1575,7 +1577,7 @@ function OrderCrudSection() {
         ...editForm,
         total_amount: parseFloat(editForm.total_amount) || 0,
       };
-      await fetch(`db-group5-452710.wl.r.appspot.com/ORDER/${id}`, {
+      await fetch(`${BASEURL}/ORDER/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1736,7 +1738,7 @@ function OrderItemCrudSection() {
   const loadItems = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/orderitems");
+      const resp = await fetch(`${BASEURL}/orderitems`);
       const data = await resp.json();
       setItems(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -1748,7 +1750,7 @@ function OrderItemCrudSection() {
   const deleteItem = async (id) => {
     if (!window.confirm(`Delete ORDERITEM with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/ORDERITEM/${id}`, {
+      await fetch(`${BASEURL}/ORDERITEM/${id}`, {
         method: "DELETE",
       });
       loadItems();
@@ -1764,7 +1766,7 @@ function OrderItemCrudSection() {
         quantity: parseInt(newItem.quantity) || 0,
         item_price: parseFloat(newItem.item_price) || 0,
       };
-      await fetch("db-group5-452710.wl.r.appspot.com/ORDERITEM", {
+      await fetch('${BASEURL}/ORDERITEM', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1799,7 +1801,7 @@ function OrderItemCrudSection() {
         quantity: parseInt(editForm.quantity) || 0,
         item_price: parseFloat(editForm.item_price) || 0,
       };
-      await fetch(`db-group5-452710.wl.r.appspot.com/ORDERITEM/${id}`, {
+      await fetch(`${BASEURL}/ORDERITEM/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1978,7 +1980,7 @@ function PaymentCrudSection() {
   const loadPayments = async () => {
     setLoading(true);
     try {
-      const resp = await fetch("https://db-group5-452710.wl.r.appspot.com/payments");
+      const resp = await fetch(`${BASEURL}/payments`);
       const data = await resp.json();
       setPayments(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -1990,7 +1992,7 @@ function PaymentCrudSection() {
   const deletePayment = async (id) => {
     if (!window.confirm(`Delete PAYMENT with ID=${id}?`)) return;
     try {
-      await fetch(`db-group5-452710.wl.r.appspot.com/PAYMENT/${id}`, {
+      await fetch(`${BASEURL}/PAYMENT/${id}`, {
         method: "DELETE",
       });
       loadPayments();
@@ -2005,7 +2007,7 @@ function PaymentCrudSection() {
         ...newPayment,
         payment_amount: parseFloat(newPayment.payment_amount) || 0,
       };
-      await fetch("db-group5-452710.wl.r.appspot.com/PAYMENT", {
+      await fetch(`${BASEURL}/PAYMENT`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -2035,7 +2037,7 @@ function PaymentCrudSection() {
         ...editForm,
         payment_amount: parseFloat(editForm.payment_amount) || 0,
       };
-      await fetch(`db-group5-452710.wl.r.appspot.com/PAYMENT/${id}`, {
+      await fetch(`${BASEURL}/PAYMENT/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
